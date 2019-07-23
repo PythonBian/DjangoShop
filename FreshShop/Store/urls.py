@@ -6,4 +6,9 @@ urlpatterns = [
     path('login/', login),
     path('index/', index),
     re_path('^$', index),
+    path('register_store/', register_store),
+]
+
+urlpatterns += [
+    path('base/', base)
 ]
