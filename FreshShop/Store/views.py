@@ -197,6 +197,35 @@ def list_goods(request):
 #
 #     return render(request,"store/goods_list.html",{"page":page,"page_range":page_range,"keywords":keywords})
 
+def goods(request,goods_id):
+    goods_data = Goods.objects.filter(id = goods_id).first()
+    return render(request,"store/goods.html",locals())
+
+def update_goods(request,goods_id):
+    goods_data = Goods.objects.filter(id=goods_id).first()
+    if request.method == "POST":
+        # 获取post请求
+        goods_name = request.POST.get("goods_name")
+        goods_price = request.POST.get("goods_price")
+        goods_number = request.POST.get("goods_number")
+        goods_description = request.POST.get("goods_description")
+        goods_date = request.POST.get("goods_date")
+        goods_safeDate = request.POST.get("goods_safeDate")
+        goods_image = request.FILES.get("goods_image")
+        # 开始修改数据
+        goods = Goods.objects.get(id = int(goods_id)) #获取当前商品
+        goods.goods_name = goods_name
+        goods.goods_price = goods_price
+        goods.goods_number = goods_number
+        goods.goods_description = goods_description
+        goods.goods_date = goods_date
+        goods.goods_safeDate = goods_safeDate
+        if goods_image: #如果有上传图片再发起修改
+            goods.goods_image = goods_image
+        goods.save()
+        return HttpResponseRedirect("/Store/goods/%s/"%goods_id)
+        # 保存多对多数据
+    return render(request, "store/update_goods.html", locals())
 
 def base(request):
     return render(request,"store/base.html")
