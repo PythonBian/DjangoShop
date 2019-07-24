@@ -28,7 +28,7 @@
             <input class="form-control form-control-user" placeholder="保质期(月)" type="text" name="goods_safeDate">
         </div>
         <div class="form-group">
-            <input class="form-control form-control-user" type="hidden" name="goods_store" value="1">
+            <input class="form-control form-control-user" type="hidden" name="goods_store" value="{{ request.COOKIES.has_store }}">
         </div>
         <div class="form-group">
             <input class="form-control form-control-user" placeholder="商品图片" type="file" name="goods_image">

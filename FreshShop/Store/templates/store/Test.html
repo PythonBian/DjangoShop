@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    {{ request.COOKIES.valid }}
+    {% if request.COOKIES.valid %}
+        <p>有cookie</p>
+    {% else %}
+        <p>没有cookie</p>
+    {% endif %}
+</body>
+</html>
