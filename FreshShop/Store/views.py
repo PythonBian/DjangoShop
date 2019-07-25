@@ -44,8 +44,10 @@ def login(request):
     登陆功能，如果登陆成功，跳转到首页
     如果失败，跳转到登陆页
     """
+    #加载登陆页面，下发页面校验cookie校验登陆请求从登陆页面发起
     response = render(request,"store/login.html")
     response.set_cookie("login_from","login_page")
+    #处理登陆
     if request.method == "POST":
         username = request.POST.get("username")
         password = request.POST.get("password")
@@ -59,15 +61,19 @@ def login(request):
                 # 校验密码是否正确
                 if user.password == web_password and cookies == "login_page":
                     response = HttpResponseRedirect("/Store/index/")
+                    # 校验是否登陆
                     response.set_cookie("username",username)
-                    response.set_cookie("user_id", user.id) #cookie提供用户id方便其他功能查询
                     request.session["username"] = username
+
+                    #cookie提供用户id方便其他功能查询
+                    response.set_cookie("user_id", user.id)
+
                     #校验是否有店铺
                     store = Store.objects.filter(user_id=user.id).first()  # 再查询店铺是否存在
                     if store:
-                        response.set_cookie("has_store", store.id)
+                        response.set_cookie("has_store", store.id) #将店铺id设置为cookie值
                     else:
-                        response.set_cookie("has_store", "")
+                        response.set_cookie("has_store", "") #没有就为空 ""代表空
                     return response
     return response
 
@@ -110,7 +116,9 @@ def register_store(request):
             store_type = StoreType.objects.get(id = i) #查询类型数据
             store.type.add(store_type) #添加到类型字段，多对多的映射表
         store.save() #保存数据
+        #数据保存成功之后，跳转到主页
         response = HttpResponseRedirect("/Store/index/")
+        #下发cookie证明当前用户有店铺
         response.set_cookie("has_store", store.id)
         return response
     return render(request, "store/register_store.html", locals())
@@ -128,6 +136,7 @@ def add_goods(request):
         goods_description = request.POST.get("goods_description")
         goods_date = request.POST.get("goods_date")
         goods_safeDate = request.POST.get("goods_safeDate")
+        #使用cookie当中的店铺id
         goods_store = request.COOKIES.get("has_store")
         goods_image = request.FILES.get("goods_image")
         #开始保存数据
@@ -149,12 +158,18 @@ def add_goods(request):
     return render(request,"store/add_goods.html")
 
 @loginValid
-def list_goods(request):
+def list_goods(request,state):
     """
     商品的列表页
     :param request:
-    :return:
+    :param state: 商品状态
+        up    在售
+        down  下架
     """
+    if state == "up":
+        state_num = 1
+    else:
+        state_num = 0
     #获取两个关键字
     keywords = request.GET.get("keywords","") #查询关键词
     page_num = request.GET.get("page_num",1) #页码
@@ -162,16 +177,17 @@ def list_goods(request):
     store_id = request.COOKIES.get("has_store")
     store = Store.objects.get(id=int(store_id))
     if keywords: #判断关键词是否存在
-        goods_list = store.goods_set.filter(goods_name__contains=keywords)#完成了模糊查询
+        goods_list = store.goods_set.filter(goods_name__contains=keywords,goods_under=state_num)#完成了模糊查询
 
     else: #如果关键词不存在，查询所有
-        goods_list = store.goods_set.all()
+        goods_list = store.goods_set.filter(goods_under=state_num)
     #分页，每页3条
     paginator = Paginator(goods_list,3)
     page = paginator.page(int(page_num))
     page_range = paginator.page_range
     #返回分页数据
-    return render(request,"store/goods_list.html",{"page":page,"page_range":page_range,"keywords":keywords})
+    return render(request,"store/goods_list.html",{"page":page,"page_range":page_range,"keywords":keywords,"state":state})
+
 @loginValid
 def goods(request,goods_id):
     goods_data = Goods.objects.filter(id = goods_id).first()
@@ -258,7 +274,21 @@ def CookieTest(request):
     response.set_cookie("valid",'')
     return response
 
-
+def set_goods(request,state):
+    if state == "up":
+        state_num = 1
+    else:
+        state_num = 0
+    id = request.GET.get("id") #get获取id
+    referer = request.META.get("HTTP_REFERER") #返回当前请求的来源地址
+    if id:
+        goods = Goods.objects.filter(id = id).first() #获取指定id的商品
+        if state == "delete":
+            goods.delete()
+        else:
+            goods.goods_under = state_num #修改状态
+            goods.save() #保存
+    return HttpResponseRedirect(referer) #跳转到请求来源页
 
 
 
