@@ -40,7 +40,6 @@ class Goods(models.Model):
 class GoodsImg(models.Model):
     img_address = models.ImageField(upload_to="store/images",verbose_name="图片地址")
     img_description = models.TextField(max_length=32, verbose_name="图片描述")
-
     goods_id = models.ForeignKey(to = Goods,on_delete = models.CASCADE, verbose_name="商品id")
 
 

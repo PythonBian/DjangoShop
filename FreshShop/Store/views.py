@@ -154,7 +154,7 @@ def add_goods(request):
             Store.objects.get(id = int(goods_store))
         )
         goods.save()
-        return HttpResponseRedirect("/Store/list_goods/")
+        return HttpResponseRedirect("/Store/list_goods/up/")
     return render(request,"store/add_goods.html")
 
 @loginValid
