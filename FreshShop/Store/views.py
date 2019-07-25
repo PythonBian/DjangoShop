@@ -291,6 +291,11 @@ def set_goods(request,state):
     return HttpResponseRedirect(referer) #跳转到请求来源页
 
 
+def logout(request):
+    response = HttpResponseRedirect("/Store/login/")
+    for key in request.COOKIES:#获取当前所有cookie
+        response.delete_cookie(key)
+    return response
 
 
 
