@@ -220,6 +220,33 @@ def update_goods(request,goods_id):
         # 保存多对多数据
     return render(request, "store/update_goods.html", locals())
 
+@loginValid
+def add_goods_type(request):
+    pass
+
+@loginValid
+def list_goods_type(request):
+    goods_type_list = GoodsType.objects.all()
+    if request.method == "POST":
+        name = request.POST.get("name")
+        description = request.POST.get("description")
+        picture = request.FILES.get("picture")
+
+        goods_type = GoodsType()
+        goods_type.name = name
+        goods_type.description = description
+        goods_type.picture = picture
+        goods_type.save()
+    return render(request,"store/goods_type_list.html",locals())
+
+@loginValid
+def delete_goods_type(request):
+    id = int(request.GET.get("id"))
+    goods = GoodsType.objects.get(id = id)
+    goods.delete()
+    return HttpResponseRedirect("/Store/list_goods_type/")
+
+
 def base(request):
     return render(request,"store/base.html")
 

@@ -12,7 +12,9 @@ urlpatterns = [
     re_path(r'list_goods/(?P<state>\w+)', list_goods),#商品列表页
     re_path(r'^goods/(?P<goods_id>\d+)',goods),
     re_path(r'update_goods/(?P<goods_id>\d+)', update_goods),
-    re_path(r'set_goods/(?P<state>\w+)/', set_goods) #设置商品状态
+    re_path(r'set_goods/(?P<state>\w+)/', set_goods), #设置商品状态
+    path(r'list_goods_type/', list_goods_type),  # 设置商品状态
+    path(r'delete_goods_type/', delete_goods_type)  # 设置商品状态
 ]
 
 urlpatterns += [

@@ -3,6 +3,7 @@ from django.shortcuts import HttpResponseRedirect
 
 from Buyer.models import *
 from Store.views import set_password
+from Store.models import *
 
 def loginValid(fun):
     def inner(request,*args,**kwargs):
@@ -53,7 +54,9 @@ def login(request):
 
 @loginValid
 def index(request):
-    return render(request,"buyer/index.html")
+    goods_type_list = GoodsType.objects.all()
+    print(goods_type_list)
+    return render(request,"buyer/index.html",locals())
 
 def logout(request):
     response = HttpResponseRedirect("/Buyer/login/")
