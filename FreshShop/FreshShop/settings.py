@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Store',
+    'Buyer',
     'ckeditor',
     'ckeditor_uploader'
 ]
@@ -134,3 +135,11 @@ CKEDITOR_UPLOAD_PATH="static/upload"
 CKEDITOR_IMAGE_BACKEND="pillow"
 
 # STATIC_ROOT = os.path.join(BASE_DIR,"static")
+
+
+
+
+
+
+
+
