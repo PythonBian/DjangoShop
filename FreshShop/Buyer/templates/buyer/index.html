@@ -32,7 +32,7 @@
 			<a href="#"><img src="/static/buyer/images/adv02.jpg"></a>
 		</div>
 	</div>
-    {% for goods_type in goods_type_list %}
+    {% for goods_type in result_list %}
 	<div class="list_model">
 		<div class="list_title clearfix">
 			<h3 class="fl" id="model01">{{ goods_type.name }}</h3>
@@ -42,13 +42,11 @@
 				<a href="#">加州提子</a>
 				<a href="#">亚马逊牛油果</a>
 			</div>
-			<a href="#" class="goods_more fr" id="fruit_more">查看更多 ></a>
-		</div>
-
+			<a href="/Buyer/goods_list/?type_id={{ goods_type.id }}" class="goods_more fr" id="fruit_more">查看更多 ></a></div>
 		<div class="goods_con clearfix">
 			<div class="goods_banner fl"><img src="/static/buyer/images/banner01.jpg"></div>
 			<ul class="goods_list fl">
-                {% for goods in goods_type.goods_set.all %}
+                {% for goods in goods_type.goods_list %}
 				<li>
 					<h4><a href="#">{{ goods.goods_name }}</a></h4>
 					<a href="#"><img src="/static/{{ goods.goods_image }}"></a>
