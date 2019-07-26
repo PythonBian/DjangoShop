@@ -128,6 +128,7 @@ def add_goods(request):
     """
     负责添加商品
     """
+    goods_type_list = GoodsType.objects.all()
     if request.method == "POST":
         #获取post请求
         goods_name = request.POST.get("goods_name")
@@ -136,6 +137,7 @@ def add_goods(request):
         goods_description = request.POST.get("goods_description")
         goods_date = request.POST.get("goods_date")
         goods_safeDate = request.POST.get("goods_safeDate")
+        goods_type = request.POST.get("goods_type")
         #使用cookie当中的店铺id
         goods_store = request.COOKIES.get("has_store")
         goods_image = request.FILES.get("goods_image")
@@ -148,6 +150,7 @@ def add_goods(request):
         goods.goods_date = goods_date
         goods.goods_safeDate = goods_safeDate
         goods.goods_image = goods_image
+        goods.goods_type = GoodsType.objects.get(id = int(goods_type))
         goods.save()
         #保存多对多数据
         goods.store_id.add(
@@ -155,7 +158,7 @@ def add_goods(request):
         )
         goods.save()
         return HttpResponseRedirect("/Store/list_goods/up/")
-    return render(request,"store/add_goods.html")
+    return render(request,"store/add_goods.html",locals())
 
 @loginValid
 def list_goods(request,state):
@@ -324,7 +327,22 @@ def logout(request):
         response.delete_cookie(key)
     return response
 
-
+def test_type_goods_type(request):
+    name_list = [
+        ("新鲜水果", "新鲜的水果，多vc多活力", "store/banner01.jpg"),
+        ("海鲜水产", "水煮不用盐，高蛋白", "store/banner02.jpg"),
+        ("猪牛羊肉", "刀刀见血，生性", "store/banner03.jpg"),
+        ("禽类蛋品", "吃我的肉，吃我的蛋，我没有意见", "store/banner04.jpg"),
+        ("新鲜蔬菜", "可以生吃，可以煮", "store/banner05.jpg"),
+        ("速冻食品", "冻得刚刚好，不软也不硬", "store/banner06.jpg"),
+    ]
+    for name,description,img in name_list:
+        goods = GoodsType()
+        goods.name = name
+        goods.description = description
+        goods.picture = img
+        goods.save()
+    return HttpResponseRedirect("/Store/list_goods_type/")
 
 
 

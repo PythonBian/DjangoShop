@@ -19,7 +19,10 @@ urlpatterns = [
 
 urlpatterns += [
     path('base/', base),
-    path('Test/', CookieTest)
+    path('Test/', CookieTest),
+    path('gt/', test_type_goods_type)
+
+
 ]
 
 

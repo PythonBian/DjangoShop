@@ -2,58 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0de54359-0a04-46a8-a479-60dc8070543c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Store/templates/store/goods_type_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/898972ba-d6a7-4477-9f2d-9083f80a49d1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/898972ba-d6a7-4477-9f2d-9083f80a49d1.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Buyer/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Buyer/migrations/0002_auto_20190725_1428.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Buyer/templates/buyer/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Buyer/templates/buyer/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Buyer/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Buyer/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store/migrations/0002_goods_goods_under.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Store/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store/templates/store/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/Store/templates/store/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Store/templates/store/add_goods.html" beforeDir="false" afterPath="$PROJECT_DIR$/Store/templates/store/add_goods.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Store/templates/store/goods_type_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/Store/templates/store/goods_type_list.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Store/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Store/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Store/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Store/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/store/images/190703165031413.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/store/images/QQ图片20190610083843.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/store/images/QQ图片20190610083843_euKNfTB.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/store/images/QQ图片20190617110038.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/store/images/QQ图片20190702222400.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/store/images/QQ图片20190702222400_0Vvn188.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/store/images/QQ图片20190702222400_9F1XYQa.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/store/images/QQ图片20190702222400_D6tBKqG.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/store/images/QQ图片20190702222400_GNbVHlr.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/store/images/QQ图片20190702222400_PxNm1k7.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/store/images/QQ图片20190702222400_UWLW5Vj.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/store/images/QQ图片20190702222400_YjJuqPw.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/store/images/QQ图片20190702222400_k6yHfcE.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/store/images/QQ图片20190702222400_tdqCAMc.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/store/images/QQ图片20190702222400_vE3NfMF.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/store/images/QQ图片20190702222400_wuOEUOU.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/store/images/QQ图片20190702222400_zUEDZrj.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/store/images/QQ截图20190701170806_BqZ1DtK.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/store/images/QQ截图20190701170806_G55uGk6.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/store/images/QQ截图20190701170806_GUwssZ2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/store/images/QQ截图20190701170806_I8GYC7k.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/store/images/QQ截图20190701170806_IxAHtb9.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/store/images/QQ截图20190701170806_LiCZsdF.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/store/images/QQ截图20190701170806_MlrdfYi.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/store/images/QQ截图20190701170806_XK14BMO.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/store/images/QQ截图20190701170806_YPrXoEQ.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/store/images/QQ截图20190701170806_aBKDExD.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/store/images/QQ截图20190701170806_bfCOpMo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/store/images/QQ截图20190701170806_iUXUNAi.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/store/images/QQ截图20190701170806_jPkGuxw.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/store/images/QQ截图20190701170806_jorunB6.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/store/images/QQ截图20190701170806_pYk7fsf.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/store/images/QQ截图20190701170806_wUVMApo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/store/images/QQ截图20190701170806_xvW0feI.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/store/images/goods001.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/store/images/goods002.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/store/images/goods003.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/store/images/goods012.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -99,7 +53,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Buyer/templates/buyer/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="22">
+            <state relative-caret-position="1188">
               <caret line="54" column="59" selection-start-line="54" selection-start-column="59" selection-end-line="54" selection-end-column="59" />
             </state>
           </provider>
@@ -108,8 +62,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Store/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="214">
-              <caret line="30" column="15" selection-start-line="30" selection-start-column="4" selection-end-line="30" selection-end-column="15" />
+            <state relative-caret-position="990">
+              <caret line="45" selection-start-line="34" selection-start-column="4" selection-end-line="45" />
             </state>
           </provider>
         </entry>
@@ -117,8 +71,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Store/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="244">
-              <caret line="15" column="47" selection-start-line="15" selection-start-column="47" selection-end-line="15" selection-end-column="47" />
+            <state relative-caret-position="440">
+              <caret line="21" column="30" selection-start-line="21" selection-start-column="30" selection-end-line="21" selection-end-column="30" />
               <folding>
                 <element signature="e#0#36#0" expanded="true" />
               </folding>
@@ -129,8 +83,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Store/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="88">
-              <caret line="246" column="56" selection-start-line="246" selection-start-column="56" selection-end-line="246" selection-end-column="56" />
+            <state relative-caret-position="44">
+              <caret line="328" selection-start-line="328" selection-end-line="328" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
@@ -141,17 +95,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Store/templates/store/goods_type_list.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="132">
-              <caret line="25" column="101" selection-start-line="25" selection-start-column="101" selection-end-line="25" selection-end-column="101" />
-              <folding>
-                <element signature="n#style#0;n#th#0;n#tr#0;n#thead#0;n#table#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#th#1;n#tr#0;n#thead#0;n#table#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#th#2;n#tr#0;n#thead#0;n#table#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#0;n#tr#0;n#tbody#0;n#table#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#0;n#tr#0;n#thead#0;n#table#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#1;n#tr#0;n#thead#0;n#table#0;n#!!top" expanded="true" />
-                <element signature="e#1551#1558#1#HTML" expanded="true" />
-              </folding>
+            <state relative-caret-position="1122">
+              <caret line="51" column="36" selection-start-line="51" selection-start-column="36" selection-end-line="51" selection-end-column="36" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Store/templates/store/add_goods.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="748">
+              <caret line="34" column="33" selection-start-line="34" selection-start-column="23" selection-end-line="34" selection-end-column="33" />
             </state>
           </provider>
         </entry>
@@ -181,7 +135,6 @@
       <find>老边</find>
       <find>hidden</find>
       <find>regi</find>
-      <find>list</find>
       <find>goods_list</find>
       <find>商品</find>
       <find>login</find>
@@ -198,6 +151,7 @@
       <find>images/</find>
       <find>登录</find>
       <find>picture</find>
+      <find>list</find>
     </findStrings>
     <replaceStrings>
       <replace>/static/vendor/</replace>
@@ -222,7 +176,6 @@
         <option value="$PROJECT_DIR$/Store/templates/store/goods.html" />
         <option value="$PROJECT_DIR$/Store/templates/store/register_store.html" />
         <option value="$PROJECT_DIR$/Store/templates/store/Test.html" />
-        <option value="$PROJECT_DIR$/Store/templates/store/add_goods.html" />
         <option value="$PROJECT_DIR$/Store/templates/store/goods_list.html" />
         <option value="$PROJECT_DIR$/FreshShop/settings.py" />
         <option value="$PROJECT_DIR$/Buyer/templates/buyer/register.html" />
@@ -237,8 +190,9 @@
         <option value="$PROJECT_DIR$/Buyer/views.py" />
         <option value="$PROJECT_DIR$/Store/models.py" />
         <option value="$PROJECT_DIR$/Store/templates/store/base.html" />
-        <option value="$PROJECT_DIR$/Store/urls.py" />
         <option value="$PROJECT_DIR$/Store/templates/store/goods_type_list.html" />
+        <option value="$PROJECT_DIR$/Store/templates/store/add_goods.html" />
+        <option value="$PROJECT_DIR$/Store/urls.py" />
         <option value="$PROJECT_DIR$/Store/views.py" />
       </list>
     </option>
@@ -257,7 +211,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -304,6 +257,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -401,23 +355,24 @@
       <workItem from="1563978129508" duration="1785000" />
       <workItem from="1564014696588" duration="9827000" />
       <workItem from="1564033280749" duration="11046000" />
-      <workItem from="1564052662621" duration="2923000" />
+      <workItem from="1564052662621" duration="7593000" />
+      <workItem from="1564101070905" duration="1222000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="79223000" />
+    <option name="totallyTimeSpent" value="85115000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.204236" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.20726173" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32569557" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32569557" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.400982" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -698,15 +653,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="das://898972ba-d6a7-4477-9f2d-9083f80a49d1/schema/main/table/Store_goodstype">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true">
-            <filter text="" />
-          </filtering>
-        </state>
-      </provider>
-    </entry>
     <entry file="das://898972ba-d6a7-4477-9f2d-9083f80a49d1/schema/main/table/Store_goods">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
@@ -760,57 +706,57 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Store/templates/store/add_goods.html">
+    <entry file="file://$PROJECT_DIR$/Buyer/templates/buyer/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
-          <caret line="23" selection-start-line="23" selection-end-line="25" selection-end-column="14" />
+        <state relative-caret-position="1188">
+          <caret line="54" column="59" selection-start-line="54" selection-start-column="59" selection-end-line="54" selection-end-column="59" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Store/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
-          <caret line="30" column="15" selection-start-line="30" selection-start-column="4" selection-end-line="30" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Buyer/templates/buyer/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="54" column="59" selection-start-line="54" selection-start-column="59" selection-end-line="54" selection-end-column="59" />
+        <state relative-caret-position="990">
+          <caret line="45" selection-start-line="34" selection-start-column="4" selection-end-line="45" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Store/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="244">
-          <caret line="15" column="47" selection-start-line="15" selection-start-column="47" selection-end-line="15" selection-end-column="47" />
+        <state relative-caret-position="440">
+          <caret line="21" column="30" selection-start-line="21" selection-start-column="30" selection-end-line="21" selection-end-column="30" />
           <folding>
             <element signature="e#0#36#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="das://898972ba-d6a7-4477-9f2d-9083f80a49d1/schema/main/table/Store_goodstype">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true">
+            <filter text="" />
+          </filtering>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Store/templates/store/goods_type_list.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="25" column="101" selection-start-line="25" selection-start-column="101" selection-end-line="25" selection-end-column="101" />
-          <folding>
-            <element signature="n#style#0;n#th#0;n#tr#0;n#thead#0;n#table#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#th#1;n#tr#0;n#thead#0;n#table#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#th#2;n#tr#0;n#thead#0;n#table#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#0;n#tr#0;n#tbody#0;n#table#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#0;n#tr#0;n#thead#0;n#table#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#1;n#tr#0;n#thead#0;n#table#0;n#!!top" expanded="true" />
-            <element signature="e#1551#1558#1#HTML" expanded="true" />
-          </folding>
+        <state relative-caret-position="1122">
+          <caret line="51" column="36" selection-start-line="51" selection-start-column="36" selection-end-line="51" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Store/templates/store/add_goods.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="748">
+          <caret line="34" column="33" selection-start-line="34" selection-start-column="23" selection-end-line="34" selection-end-column="33" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Store/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="246" column="56" selection-start-line="246" selection-start-column="56" selection-end-line="246" selection-end-column="56" />
+        <state relative-caret-position="44">
+          <caret line="328" selection-start-line="328" selection-end-line="328" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
           </folding>
