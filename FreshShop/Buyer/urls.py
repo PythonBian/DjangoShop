@@ -6,6 +6,8 @@ urlpatterns = [
     path("register/", register),
     path("index/", index),
     path("goods_list/", goods_list),
+    path("goods_detail/", goods_detail),
+    path("place_order/", place_order)
 ]
 
 urlpatterns+=[

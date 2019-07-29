@@ -14,15 +14,13 @@ urlpatterns = [
     re_path(r'update_goods/(?P<goods_id>\d+)', update_goods),
     re_path(r'set_goods/(?P<state>\w+)/', set_goods), #设置商品状态
     path(r'list_goods_type/', list_goods_type),  # 设置商品状态
-    path(r'delete_goods_type/', delete_goods_type)  # 设置商品状态
+    path(r'delete_goods_type/', delete_goods_type),  # 设置商品状态
+    path(r'order_list/', order_list)  # 订单列表
 ]
 
 urlpatterns += [
     path('base/', base),
     path('Test/', CookieTest),
-    path('gt/', test_type_goods_type)
-
-
 ]
 
 

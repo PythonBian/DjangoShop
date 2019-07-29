@@ -1,3 +1,5 @@
+import time
+
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import HttpResponseRedirect
@@ -106,6 +108,59 @@ def logout(request):
 def base(request):
     return render(request,"buyer/base.html")
 
+def goods_detail(request):
+    goods_id = request.GET.get("goods_id")
+    if goods_id:
+        goods = Goods.objects.filter(id = goods_id).first()
+        if goods:
+            return render(request,"buyer/detail.html",locals())
+    return HttpResponse("没有您指定的商品")
+
+def setOrderId(user_id,goods_id,store_id):
+    """
+    设置订单编号
+    时间+用户id+商品的id+商铺+id
+    """
+    strtime = time.strftime("%Y%m%d%H%M%S",time.localtime())
+    return strtime+user_id+goods_id+store_id
+
+def place_order(request):
+    if request.method == "POST":
+        #post数据
+        count = int(request.POST.get("count"))
+        goods_id = request.POST.get("goods_id")
+        #cookie的数据
+        user_id = request.COOKIES.get("user_id")
+        #数据库的数据
+        goods = Goods.objects.get(id = goods_id)
+        store_id = goods.store_id.id
+        price = goods.goods_price
+
+        order = Order()
+        order.order_id = setOrderId(str(user_id),str(goods_id),str(store_id))
+        order.goods_count = count
+        order.order_user = Buyer.objects.get(id = user_id)
+        order.order_price = count*price
+        order.order_status = 1
+        order.save()
+
+        order_detail = OrderDetail()
+        order_detail.order_id = order
+        order_detail.goods_id = goods_id
+        order_detail.goods_name = goods.goods_name
+        order_detail.goods_price = goods.goods_price
+        order_detail.goods_number = count
+        order_detail.goods_total = count*goods.goods_price
+        order_detail.goods_store = store_id
+        order_detail.goods_image = goods.goods_image
+        order_detail.save()
+
+        detail = [order_detail]
+
+        return render(request,"buyer/place_order.html",locals())
+    else:
+        return HttpResponse("非法请求")
+
 def pay_result(request):
     """
     支付宝支付成功自动用get请求返回的参数
@@ -138,9 +193,9 @@ def pay_result(request):
     return render(request,"buyer/pay_result.html",locals())
 
 def pay_order(request):
+
     money = request.GET.get("money") #获取订单金额
     order_id = request.GET.get("order_id") #获取订单id
-
     alipay_public_key_string = """-----BEGIN PUBLIC KEY-----
     MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA6M7zHSmJhDrrfKt7eYapbbGhdth72wcws74vLQamlzIpCuLLTaJFUkva0fVlwAwl0l9DZotLSORKxxIORhzslOxtwGnQ+staKJUEe2AhLVu/v5jRTIuVPVFm7qgWXD/H3vNF9kL9jFCl1REvgc207xe0r1rk41cQFAodWmJEp+0pcKq6UzAi8ZNhnjbSQjOE1WbMDIb+lgXQdDlk/Bp5w2W7wNJ6oAISejruKAOvCSnbk1WRUYUDPXxbJakhqBoozrni8R5LKEQ/MJAs9ztCi3h3RKdAhaOqgaTwrR52fCqolaCl0JTUZu0YNIqUdeo3MbnqC95HIK82N0h6oL9mWwIDAQAB
     -----END PUBLIC KEY-----"""
@@ -166,6 +221,10 @@ def pay_order(request):
         return_url="http://127.0.0.1:8000/Buyer/pay_result/",
         notify_url="http://127.0.0.1:8000/Buyer/pay_result/"
     )
+
+    order = Order.objects.get(order_id = order_id)
+    order.order_status = 2
+    order.save()
 
     return HttpResponseRedirect("https://openapi.alipaydev.com/gateway.do?" + order_string)
 

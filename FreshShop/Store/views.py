@@ -4,6 +4,7 @@ from django.core.paginator import Paginator
 from django.shortcuts import HttpResponseRedirect
 
 from Store.models import *
+from Buyer.models import *
 
 def loginValid(fun):
     def inner(request,*args,**kwargs):
@@ -151,11 +152,7 @@ def add_goods(request):
         goods.goods_safeDate = goods_safeDate
         goods.goods_image = goods_image
         goods.goods_type = GoodsType.objects.get(id = int(goods_type))
-        goods.save()
-        #保存多对多数据
-        goods.store_id.add(
-            Store.objects.get(id = int(goods_store))
-        )
+        goods.store_id = Store.objects.get(id = int(goods_store))
         goods.save()
         return HttpResponseRedirect("/Store/list_goods/up/")
     return render(request,"store/add_goods.html",locals())
@@ -254,35 +251,6 @@ def base(request):
     return render(request,"store/base.html")
 
 
-# def list_goods(request):
-#     """
-#     商品的列表页
-#     :param request:
-#     :return:
-#     """
-#     #完成了模糊查询
-#     keywords = request.GET.get("keywords","")
-#     page_num = request.GET.get("page_num",1)
-#     referer = request.META.get("HTTP_REFERER")
-#     if keywords:
-#         goods_list = Goods.objects.filter(goods_name__contains=keywords)
-#     else:
-#         if referer and "?" in referer:
-#             get_str = referer.split("?")[1]
-#             get_list = [i.split("=") for i in get_str.split("&")]
-#             get_dict = dict(get_list)
-#             get_dict["keywords"] = get_dict["keywords"].encode()
-#             if "keywords" in get_dict:
-#                 keywords = get_dict["keywords"]
-#             goods_list = Goods.objects.filter(goods_name__contains=keywords)
-#         else:
-#             goods_list = Goods.objects.all()
-#     #完成分页查询
-#     paginator = Paginator(goods_list,3)
-#     page = paginator.page(int(page_num))
-#     page_range = paginator.page_range
-#
-#     return render(request,"store/goods_list.html",{"page":page,"page_range":page_range,"keywords":keywords})
 
 # Create your views here.
 
@@ -320,6 +288,10 @@ def set_goods(request,state):
             goods.save() #保存
     return HttpResponseRedirect(referer) #跳转到请求来源页
 
+def order_list(request):
+    store_id = request.COOKIES.get("has_store")
+    order_list = OrderDetail.objects.filter(order_id__order_status=2,goods_store=store_id)
+    return render(request,"store/order_list.html",locals())
 
 def logout(request):
     response = HttpResponseRedirect("/Store/login/")
@@ -327,22 +299,6 @@ def logout(request):
         response.delete_cookie(key)
     return response
 
-def test_type_goods_type(request):
-    name_list = [
-        ("新鲜水果", "新鲜的水果，多vc多活力", "store/banner01.jpg"),
-        ("海鲜水产", "水煮不用盐，高蛋白", "store/banner02.jpg"),
-        ("猪牛羊肉", "刀刀见血，生性", "store/banner03.jpg"),
-        ("禽类蛋品", "吃我的肉，吃我的蛋，我没有意见", "store/banner04.jpg"),
-        ("新鲜蔬菜", "可以生吃，可以煮", "store/banner05.jpg"),
-        ("速冻食品", "冻得刚刚好，不软也不硬", "store/banner06.jpg"),
-    ]
-    for name,description,img in name_list:
-        goods = GoodsType()
-        goods.name = name
-        goods.description = description
-        goods.picture = img
-        goods.save()
-    return HttpResponseRedirect("/Store/list_goods_type/")
 
 
 

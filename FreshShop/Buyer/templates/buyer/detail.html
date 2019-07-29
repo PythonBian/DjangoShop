@@ -1,0 +1,93 @@
+{% extends "buyer/base.html" %}
+
+{% block title %}
+    商品详情页
+{% endblock %}
+
+{% block content %}
+    <div class="goods_detail_con clearfix">
+		<div class="goods_detail_pic fl"><img style="width: 350px; height: 350px;" src="/static/{{ goods.goods_image }}"></div>
+
+		<div class="goods_detail_list fr">
+			<h3>{{ goods.goods_name }}</h3>
+			<p>{{ goods.goods_description }}</p>
+			<div class="prize_bar">
+				<span class="show_pirze">¥<em id="price">{{ goods.goods_price }}</em></span>
+				<span class="show_unit">单  位：500g</span>
+			</div>
+            <form method="post" action="/Buyer/place_order/">
+            {% csrf_token %}
+			<div class="goods_num clearfix">
+				<div class="num_name fl">数 量：</div>
+				<div class="num_add fl">
+					<input type="text" id="count" name="count" class="num_show fl" value="1">
+                    <input type="hidden" id="goods_id" name="goods_id" class="num_show fl" value="{{ goods.id }}">
+					<a href="javascript:;" onclick="changeCount('add')" id="add" class="add fr">+</a>
+					<a href="javascript:;" onclick="changeCount('minus')" id="minus" class="minus fr">-</a>
+				</div>
+			</div>
+			<div class="total">总价：<em id="total">{{ goods.goods_price }}</em><em>元</em></div>
+			<div class="operate_btn">
+				<input class="buy_btn" type="submit" value="立即购买">
+				<a href="javascript:;" class="add_cart" id="add_cart">加入购物车</a>
+			</div>
+            </form>
+		</div>
+	</div>
+
+	<div class="main_wrap clearfix">
+		<div class="l_wrap fl clearfix">
+			<div class="new_goods">
+				<h3>新品推荐</h3>
+				<ul>
+					<li>
+						<a href="#"><img src="/static/buyer/images/goods/goods001.jpg"></a>
+						<h4><a href="#">进口柠檬</a></h4>
+						<div class="prize">￥3.90</div>
+					</li>
+					<li>
+						<a href="#"><img src="/static/buyer/images/goods/goods002.jpg"></a>
+						<h4><a href="#">玫瑰香葡萄</a></h4>
+						<div class="prize">￥16.80</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="r_wrap fr clearfix">
+			<ul class="detail_tab clearfix">
+				<li class="active">商品介绍</li>
+				<li>评论</li>
+			</ul>
+
+			<div class="tab_content">
+				<dl>
+					<dt>商品详情：</dt>
+					<dd>{{ goods.goods_description }}</dd>
+				</dl>
+			</div>
+
+		</div>
+	</div>
+{% endblock %}
+{% block script %}
+    <script src="/static/buyer/js/jquery-1.12.4.min.js"></script>
+    <script>
+        function changeCount(ty){
+            var value = $("#count").val();
+            if(ty == "add"){
+                $("#count").val(++value)
+            }else{
+                if(value <= 1){
+                    $("#count").val(1)
+                }else {
+                    $("#count").val(--value)
+                }
+            }
+            var price =$("#price").text();
+            var total_price = price * value;
+
+            $("#total").text(total_price.toFixed(2))
+        }
+    </script>
+{% endblock %}
