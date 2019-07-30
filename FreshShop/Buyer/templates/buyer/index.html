@@ -44,12 +44,12 @@
 			</div>
 			<a href="/Buyer/goods_list/?type_id={{ goods_type.id }}" class="goods_more fr" id="fruit_more">查看更多 ></a></div>
 		<div class="goods_con clearfix">
-			<div class="goods_banner fl"><img src="/static/buyer/images/banner01.jpg"></div>
+			<div class="goods_banner fl"><img src="/static/{{ goods_type.picture }}"></div>
 			<ul class="goods_list fl">
                 {% for goods in goods_type.goods_list %}
 				<li>
-					<h4><a href="#">{{ goods.goods_name }}</a></h4>
-					<a href="#"><img src="/static/{{ goods.goods_image }}"></a>
+					<h4><a href="/Buyer/goods_detail/?goods_id={{ goods.id }}">{{ goods.goods_name }}</a></h4>
+					<a href="/Buyer/goods_detail/?goods_id={{ goods.id }}"><img src="/static/{{ goods.goods_image }}"></a>
 					<div class="prize">{{ goods.goods_price }}</div>
 				</li>
 				{% endfor %}

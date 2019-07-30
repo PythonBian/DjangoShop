@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import JsonResponse
 from django.shortcuts import HttpResponseRedirect
+from django.db.models import Sum
 
 from Buyer.models import *
 from Store.views import set_password
@@ -272,6 +273,16 @@ def cart(request):
         goods_count = len(cart_data) #提交过来的的数据总的数量
         goods_total = sum([int(i.goods_total) for i in cart_data])#订单的总价
 
+        #修改使用聚类查询返回指定商品的总价
+        #1、查询到所有的商品
+        cart_data = []  # 收集前端传递过来的商品的id
+        for k, v in post_data.items():
+            if k.startswith("goods_"):
+                cart_data.append(int(v))
+        #2、使用 in方法进行范围的划定，然后使用Sum方法进行计算
+        cart_goods = Cart.objects.filter(id__in=cart_data).aggregate(Sum("goods_total")) #获取到总价
+        print(cart_goods)
+
         #保存订单
         order = Order()
         order.order_id = setOrderId(user_id,goods_count,"2")
@@ -287,7 +298,7 @@ def cart(request):
         for detail in cart_data:
             order_detail = OrderDetail()
             order_detail.order_id = order #order是一条订单数据
-            order_detail.goods_id = detail.id
+            order_detail.goods_id = detail.goods_id
             order_detail.goods_name = detail.goods_name
             order_detail.goods_price = detail.goods_price
             order_detail.goods_number = detail.goods_number
@@ -300,6 +311,67 @@ def cart(request):
 
     return render(request,"buyer/cart.html",locals())
 
+import datetime
+def TestGoods(request):
+    goods_type = GoodsType.objects.all()
+    sg = "杏、樱桃、桃、水蜜桃、油桃、黑莓、覆盆子、云莓、罗甘莓、白里叶莓、橘子、砂糖桔、橙子、柠檬、青柠、柚子、金桔、葡萄柚、香橼、佛手、指橙、黄皮果、蟠桃、李子、梅子、青梅、西梅、白玉樱桃"
+    znyr = "猪肉、猪腿、大肠、羊肉、羊蹄、羊头、羊杂、牛板筋、牛肉、牛排"
+    hxsc = "巴沙鱼、虾仁、三文鱼、长尾鳕、白虾、北极甜虾、大黄鱼、海鳝鱼、美国红黑虎虾"
+    qldl = "乌骨鸡、绿壳蛋乌鸡、榛鸡、黑凤鸡、白来航鸡、安得纽夏鸡、黑米诺卡鸡、洛岛红鸡、黑狼山鸡、新汗夏、芦花鸡、浅花苏塞克斯、澳洲黑、九斤黄鸡、七彩山鸡"
+    store = Store.objects.get(id=1)
+    for f in sg.split("、"):
+        goods = Goods()
+        goods.goods_name = f
+        goods.goods_price = 25.0
+        goods.goods_image = "store/images/page_1_10.jpg"
+        goods.goods_number = 100
+        goods.goods_description = f
+        goods.goods_date = datetime.datetime.now()
+        goods.goods_safeDate = 1
+        goods.goods_under = 1
+        goods.goods_type = goods_type[0]
+        goods.store_id = store
+        goods.save()
+    for z in znyr.split("、"):
+        goods = Goods()
+        goods.goods_name = z
+        goods.goods_price = 25.0
+        goods.goods_image = "store/images/page_1_4.jpg"
+        goods.goods_number = 100
+        goods.goods_description = z
+        goods.goods_date = datetime.datetime.now()
+        goods.goods_safeDate = 1
+        goods.goods_under = 1
+        goods.goods_type = goods_type[1]
+        goods.store_id = store
+        goods.save()
+    for h in hxsc.split("、"):
+        goods = Goods()
+        goods.goods_name = h
+        goods.goods_price = 25.0
+        goods.goods_image = "store/images/page_1_5.jpg"
+        goods.goods_number = 100
+        goods.goods_description = h
+        goods.goods_date = datetime.datetime.now()
+        goods.goods_safeDate = 1
+        goods.goods_under = 1
+        goods.goods_type = goods_type[2]
+        goods.store_id = store
+        goods.save()
+    for q in qldl.split("、"):
+        goods = Goods()
+        goods.goods_name = q
+        goods.goods_price = 25.0
+        goods.goods_image = "store/images/page_1_9.jpg"
+        goods.goods_number = 100
+        goods.goods_description = q
+        goods.goods_date = datetime.datetime.now()
+        goods.goods_safeDate = 1
+        goods.goods_under = 1
+        goods.goods_type = goods_type[3]
+        goods.store_id = store
+        goods.save()
+    return HttpResponse("ok")
 
 # Create your views here.
 
