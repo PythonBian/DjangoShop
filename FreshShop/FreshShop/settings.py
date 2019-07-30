@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'Store',
     'Buyer',
     'ckeditor',
-    'ckeditor_uploader'
+    'rest_framework',
+    'ckeditor_uploader',
 ]
 
 MIDDLEWARE = [
@@ -133,6 +134,13 @@ MEDIA_ROOT = os.path.join(BASE_DIR,"static")
 
 CKEDITOR_UPLOAD_PATH="static/upload"
 CKEDITOR_IMAGE_BACKEND="pillow"
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
+
 
 # STATIC_ROOT = os.path.join(BASE_DIR,"static")
 

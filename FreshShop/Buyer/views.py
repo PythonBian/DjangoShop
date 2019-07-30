@@ -123,7 +123,7 @@ def setOrderId(user_id,goods_id,store_id):
     时间+用户id+商品的id+商铺+id
     """
     strtime = time.strftime("%Y%m%d%H%M%S",time.localtime())
-    return strtime+user_id+goods_id+store_id
+    return strtime+str(user_id)+str(goods_id)+str(store_id)
 
 def place_order(request):
     if request.method == "POST":
@@ -136,7 +136,7 @@ def place_order(request):
         goods = Goods.objects.get(id = goods_id)
         store_id = goods.store_id.id
         price = goods.goods_price
-
+        #保存订单
         order = Order()
         order.order_id = setOrderId(str(user_id),str(goods_id),str(store_id))
         order.goods_count = count
@@ -144,7 +144,7 @@ def place_order(request):
         order.order_price = count*price
         order.order_status = 1
         order.save()
-
+        #订单详情
         order_detail = OrderDetail()
         order_detail.order_id = order
         order_detail.goods_id = goods_id
@@ -160,7 +160,13 @@ def place_order(request):
 
         return render(request,"buyer/place_order.html",locals())
     else:
-        return HttpResponse("非法请求")
+        order_id = request.GET.get("order_id")
+        if order_id:
+            order = Order.objects.get(id = order_id)
+            detail = order.orderdetail_set.all()
+            return render(request,"buyer/place_order.html",locals())
+        else:
+            return HttpResponse("非法请求")
 
 def pay_result(request):
     """
@@ -257,6 +263,41 @@ def add_cart(request):
 def cart(request):
     user_id = request.COOKIES.get("user_id")
     goods_list = Cart.objects.filter(user_id = user_id)
+    if request.method == "POST":
+        post_data = request.POST
+        cart_data = [] #收集前端传递过来的商品
+        for k,v in post_data.items():
+            if k.startswith("goods_"):
+                cart_data.append(Cart.objects.get(id = int(v)))
+        goods_count = len(cart_data) #提交过来的的数据总的数量
+        goods_total = sum([int(i.goods_total) for i in cart_data])#订单的总价
+
+        #保存订单
+        order = Order()
+        order.order_id = setOrderId(user_id,goods_count,"2")
+        #订单当中有多个商品或者多个店铺，使用goods_count来代替商品id，用2代替店铺id
+        order.goods_count = goods_count
+        order.order_user = Buyer.objects.get(id = user_id)
+        order.order_price = goods_total
+        order.order_status = 1
+        order.save()
+
+        #保存订单详情
+        #这里的detail是购物车里的数据实例，不是商品的实例
+        for detail in cart_data:
+            order_detail = OrderDetail()
+            order_detail.order_id = order #order是一条订单数据
+            order_detail.goods_id = detail.id
+            order_detail.goods_name = detail.goods_name
+            order_detail.goods_price = detail.goods_price
+            order_detail.goods_number = detail.goods_number
+            order_detail.goods_total = detail.goods_total
+            order_detail.goods_store = detail.goods_store
+            order_detail.goods_image = detail.goods_picture
+            order_detail.save()
+        url = "/Buyer/place_order/?order_id=%s"%order.id
+        return HttpResponseRedirect(url)
+
     return render(request,"buyer/cart.html",locals())
 
 
