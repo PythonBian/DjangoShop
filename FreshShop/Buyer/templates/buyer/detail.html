@@ -89,5 +89,32 @@
 
             $("#total").text(total_price.toFixed(2))
         }
+        $("#add_cart").click(
+            function () {
+                var count = $("#count").val();
+                var goods_id = $("#goods_id").val()
+                var sendData = {
+                    "count": count,
+                    "goods_id": goods_id,
+                    "csrfmiddlewaretoken": '{{ csrf_token }}'
+                };
+                console.log(sendData);
+                var url = "/Buyer/add_cart/";
+                $.ajax(
+                    {
+                        url: url,
+                        type: "post",
+                        data: sendData,
+                        success: function (data) {
+                            alert(data.data)
+                        },
+                        error: function (error) {
+                            console.log(error)
+                        }
+                    }
+                )
+            }
+        )
+
     </script>
 {% endblock %}

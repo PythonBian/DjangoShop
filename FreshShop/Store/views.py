@@ -258,15 +258,15 @@ def base(request):
 def CookieTest(request):
     #查询拥有指定商品的所有店铺
     goods = Goods.objects.get(id = 1)
-    store_list = goods.store_id.all()
-    store_list = goods.store_id.filter()
-    store_list = goods.store_id.get()
+    # store_list = goods.store_id.all()
+    # store_list = goods.store_id.filter()
+    # store_list = goods.store_id.get()
     #查询指定店铺拥有的所有商品
-    store = Store.objects.get(id = 17)
+    # store = Store.objects.get(id = 17)
     #goods是多对多表的名称的小写_set是固定写法
-    store.goods_set.get()
-    store.goods_set.filter()
-    store.goods_set.all()
+    # store.goods_set.get()
+    # store.goods_set.filter()
+    # store.goods_set.all()
 
     response = render(request,"store/Test.html",locals())
     response.set_cookie("valid",'')
@@ -292,6 +292,7 @@ def order_list(request):
     store_id = request.COOKIES.get("has_store")
     order_list = OrderDetail.objects.filter(order_id__order_status=2,goods_store=store_id)
     return render(request,"store/order_list.html",locals())
+
 
 def logout(request):
     response = HttpResponseRedirect("/Store/login/")

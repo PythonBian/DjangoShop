@@ -2,6 +2,7 @@ import time
 
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.http import JsonResponse
 from django.shortcuts import HttpResponseRedirect
 
 from Buyer.models import *
@@ -227,6 +228,37 @@ def pay_order(request):
     order.save()
 
     return HttpResponseRedirect("https://openapi.alipaydev.com/gateway.do?" + order_string)
+
+def add_cart(request):
+    result = {"state": "error","data":""}
+    if request.method == "POST":
+        count = int(request.POST.get("count"))
+        goods_id = request.POST.get("goods_id")
+        goods = Goods.objects.get(id = int(goods_id))
+
+        user_id = request.COOKIES.get("user_id")
+
+        cart = Cart()
+        cart.goods_name = goods.goods_name
+        cart.goods_price = goods.goods_price
+        cart.goods_total = goods.goods_price*count
+        cart.goods_number = count
+        cart.goods_picture = goods.goods_image
+        cart.goods_id = goods.id
+        cart.goods_store = goods.store_id.id
+        cart.user_id = user_id
+        cart.save()
+        result["state"] = "success"
+        result["data"] = "商品添加成功"
+    else:
+        result["data"] = "请求错误"
+    return JsonResponse(result)
+
+def cart(request):
+    user_id = request.COOKIES.get("user_id")
+    goods_list = Cart.objects.filter(user_id = user_id)
+    return render(request,"buyer/cart.html",locals())
+
 
 # Create your views here.
 
