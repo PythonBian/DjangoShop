@@ -71,6 +71,7 @@ class Goods(models.Model):
     objects = GoodsManage()
     def __str__(self):
         return self.goods_name
+
 class GoodsImg(models.Model):
     img_address = models.ImageField(upload_to="store/images",verbose_name="图片地址")
     img_description = models.TextField(max_length=32, verbose_name="图片描述")

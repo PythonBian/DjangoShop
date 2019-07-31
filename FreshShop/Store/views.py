@@ -300,9 +300,25 @@ def logout(request):
         response.delete_cookie(key)
     return response
 
+from rest_framework import viewsets,mixins
+
+from Store.serializers import *
+
+#当前部分还是为了自习接口的查询逻辑
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = Goods.objects.all() #具体返回的数据
+    serializer_class = UserSerializer #指定过滤的类
 
 
+class TypeViewSet(viewsets.ModelViewSet):
+    """
+    返回具体查询的内容
+    """
+    queryset = GoodsType.objects.all()
+    serializer_class = GoodsTypeSerializer
 
+def ajax_goods_list(request):
+    return render(request,"store/ajax_goods_list.html")
 
 
 
