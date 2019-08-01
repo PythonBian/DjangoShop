@@ -303,12 +303,18 @@ def logout(request):
 from rest_framework import viewsets,mixins
 
 from Store.serializers import *
+from django_filters.rest_framework import DjangoFilterBackend #导入过滤器
 
 #当前部分还是为了自习接口的查询逻辑
 class UserViewSet(viewsets.ModelViewSet):
+    """
+    查询所有的商品，并且实现了分页
+    """
     queryset = Goods.objects.all() #具体返回的数据
     serializer_class = UserSerializer #指定过滤的类
-
+    #filter_class = GoodsFilter
+    filter_backends = [DjangoFilterBackend] #采用哪个过滤器
+    filterset_fields = ['goods_name',"goods_price"] #进行查询的字段
 
 class TypeViewSet(viewsets.ModelViewSet):
     """
@@ -320,5 +326,13 @@ class TypeViewSet(viewsets.ModelViewSet):
 def ajax_goods_list(request):
     return render(request,"store/ajax_goods_list.html")
 
+from django.core.mail import send_mail
+def sendMail(request):
+    send_mail("邮件主题","邮件内容","from_email",["to_email"],fail_silently=False)
 
+from CeleryTask.tasks import add
+from django.http import JsonResponse
 
+def get_add(request):
+    add.delay(2,3)
+    return JsonResponse({"statue":200})

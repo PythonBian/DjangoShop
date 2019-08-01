@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'Store',
     'Buyer',
     'ckeditor',
+    'djcelery',
     'rest_framework',
     'ckeditor_uploader',
 ]
@@ -128,6 +129,7 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR,"static"),
 )
 
+# STATIC_ROOT = os.path.join(BASE_DIR,"static")
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR,"static")
@@ -138,16 +140,55 @@ CKEDITOR_IMAGE_BACKEND="pillow"
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ],
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE':10
+    ], #权限
+
+    'DEFAULT_RENDERER_CLASSES': (
+        'utils.rendererresponse.customrenderer',
+    ), # 自定义返回内容
+
+    'DEFAULT_FILTER_BACKENDS': (
+        'django_filters.rest_framework.DjangoFilterBackend',  # django-filter 自带的查询过滤器
+    ),
+
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination', #分页
+    'PAGE_SIZE':10,
+
 }
 
+#配置邮件服务器
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend" #发送邮件采用smtp服务
 
-# STATIC_ROOT = os.path.join(BASE_DIR,"static")
+EMAIL_USE_TLS = False #使用tls方式
+
+EMAIL_HOST = "smtp.qq.com"
+EMAIL_PORT = 465
+EMAIL_HOST_USER = "3392279511@qq.com"
+EMAIL_HOST_PASSWORD = "xxxx"
+DEFAULT_FROM_EMAIL = "3392279511@qq.com"
 
 
+#celery配置
 
+import djcelery #导入django-celery模块
+djcelery.setup_loader() #进行模块载
+BROKER_URL = 'redis://127.0.0.1:6379/1' #任务容器地址，redis数据库地址
+CELERY_IMPORTS = ('CeleryTask.tasks')  #具体的任务文件
+CELERY_TIMEZONE = 'Asia/Shanghai' #celery时区
+CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler' #celey处理器，固定
+
+#celery 的定时器
+from celery.schedules import crontab
+from celery.schedules import timedelta
+
+CELERYBEAT_SCHEDULE = {    #定时器策略
+    #定时任务一：　每隔30s运行一次
+    u'测试定时器1': {
+        "task": "celeryTask.tasks.taskExample",
+        #"schedule": crontab(minute='*/2'),  # or 'schedule':   timedelta(seconds=3),
+        "schedule":timedelta(seconds=30),
+        "args": (),
+    },
+}
 
 
 

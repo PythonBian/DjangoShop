@@ -21,7 +21,8 @@ urlpatterns = [
 urlpatterns += [
     path('base/', base),
     path('Test/', CookieTest),
-    path(r'agl/', ajax_goods_list)  # 订单列表
+    path(r'agl/', ajax_goods_list),  # 订单列表
+    path(r'get_add/', get_add)  # 订单列表
 ]
 
 
