@@ -331,12 +331,37 @@ def sendMail(request):
     send_mail("邮件主题","邮件内容","from_email",["to_email"],fail_silently=False)
 
 from CeleryTask.tasks import add
-from django.http import JsonResponse
+from django.http import JsonResponse,HttpResponse
 
 def get_add(request):
     add.delay(2,3)
     return JsonResponse({"statue":200})
 
+# def small_white_views(request):
+#     print("我是小白视图")
+#     raise TypeError("我就不想好好的")
+#     return HttpResponse("我是小白视图")
+
 def small_white_views(request):
-    print("我是小白视图")
-    return JsonResponse({"name":"小白"})
+    # print("我是小白视图")
+
+    rep = HttpResponse("I am rep")
+    rep.render = lambda : HttpResponse("hello world")
+    return rep
+
+# def small_white_views(request):
+#     # print("我是小白视图")
+#     def hello():
+#         return HttpResponse("hello world")
+#     rep = HttpResponse("I am rep")
+#     rep.render = hello
+#     return rep
+
+# def small_white_views(request):
+#     print("我是小白视图")
+#     def render():
+#         print("hello world")
+#         return HttpResponse("98k")
+#     rep = HttpResponse("od")
+#     rep.render = render
+#     return rep
