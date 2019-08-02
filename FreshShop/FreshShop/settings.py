@@ -53,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'FreshShop.middleware.MiddlewareTest'
 ]
 
 ROOT_URLCONF = 'FreshShop.urls'
@@ -183,11 +184,18 @@ from celery.schedules import timedelta
 CELERYBEAT_SCHEDULE = {    #定时器策略
     #定时任务一：　每隔30s运行一次
     u'测试定时器1': {
-        "task": "celeryTask.tasks.taskExample",
+        "task": "CeleryTask.tasks.taskExample",
         #"schedule": crontab(minute='*/2'),  # or 'schedule':   timedelta(seconds=3),
-        "schedule":timedelta(seconds=30),
+        "schedule":timedelta(seconds=1),
         "args": (),
     },
+    u'来自老边的亲切问候': {
+        "task": "CeleryTask.tasks.DingTalk",
+        # "schedule": crontab(minute='*/2'),  # or 'schedule':   timedelta(seconds=3),
+        "schedule": timedelta(seconds=3),
+        "args": (),
+    },
+
 }
 
 

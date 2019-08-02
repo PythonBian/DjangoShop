@@ -336,3 +336,7 @@ from django.http import JsonResponse
 def get_add(request):
     add.delay(2,3)
     return JsonResponse({"statue":200})
+
+def small_white_views(request):
+    print("我是小白视图")
+    return JsonResponse({"name":"小白"})
