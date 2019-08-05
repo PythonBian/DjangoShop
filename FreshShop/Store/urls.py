@@ -17,13 +17,14 @@ urlpatterns = [
     path(r'delete_goods_type/', delete_goods_type),  # 设置商品状态
     path(r'order_list/', order_list) # 订单列表
 ]
+from django.views.decorators.cache import cache_page
 
 urlpatterns += [
     path('base/', base),
     path('Test/', CookieTest),
     path(r'agl/', ajax_goods_list),  # 订单列表
     path(r'get_add/', get_add),  # 订单列表
-    path(r'swv/', small_white_views),  # 订单列表
+    path(r'swv/', cache_page(15*60)(small_white_views)),  # 订单列表
 ]
 
 

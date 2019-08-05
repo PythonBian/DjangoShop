@@ -1,3 +1,5 @@
+{% load cache %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,5 +13,8 @@
     {% else %}
         <p>没有cookie</p>
     {% endif %}
+    {% cache 500 hsqcache %}
+    <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1564983312175&di=9fc0756018d0cd87cd816c4b1b9b16bf&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01b17357ff5890a84a0e282bcbb8b8.jpg%402o.jpg">
+    {% endcache %}
 </body>
 </html>

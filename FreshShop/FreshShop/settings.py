@@ -46,6 +46,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    # 'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -54,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'FreshShop.middleware.MiddlewareTest',
+    # 'django.middleware.cache.FetchFromCacheMiddleware'
 ]
 
 ROOT_URLCONF = 'FreshShop.urls'
@@ -84,6 +86,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'CONN_MAX_AGE': 600
     }
 }
 
@@ -110,15 +113,15 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-hans'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai' #指定时区
 
 USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False #为True 默认使用utc 0时区
 
 
 # Static files (CSS, JavaScript, Images)
@@ -198,7 +201,31 @@ CELERYBEAT_SCHEDULE = {    #定时器策略
 
 }
 
+#cache需要有自己的配置，配置的结构，不要自己手写，用global_settings当中的配置结构
+#python目录/lib/site-package/django/conf/global_settings
+#
+# CACHES = {
+#     'default': {
+#         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache', #默认使用本地缓存
+#     }
+# }
 
+# memcache 缓存
+# CACHES = {
+#     'default': {
+#         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache', #申明使用memcache进行缓存
+#         'LOCATION': [
+#             '127.0.0.1:11211'
+#         ] #memcache地址
+#     }
+# }
+#数据库缓存
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache', #默认使用数据库缓存
+        'LOCATION': 'cache_table' #存放缓存的表
+    }
+}
 
-
-
+# CACHE_MIDDLEWARE_KEY_PREFIX = ''
+# CACHE_MIDDLEWARE_SECONDS = 600

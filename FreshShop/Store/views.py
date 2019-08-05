@@ -341,13 +341,29 @@ def get_add(request):
 #     print("我是小白视图")
 #     raise TypeError("我就不想好好的")
 #     return HttpResponse("我是小白视图")
+from django.views.decorators.cache import cache_page
+from django.core.cache import cache
 
 def small_white_views(request):
     # print("我是小白视图")
 
-    rep = HttpResponse("I am rep")
-    rep.render = lambda : HttpResponse("hello world")
-    return rep
+    store_data = cache.get("store_data") #如果没有返回None
+    if store_data:
+        store_data = store_data
+    else:
+        data = Store.objects.all()
+        cache.set("store_data",data,30)
+        #cache.add("store_data",data,30) #add只会添加一个缓存，不会修改已经存在的缓存
+        store_data = data
+    return render(request,"store/index.html",locals())
+
+
+# @cache_page(60*15) #对当前视图进行缓存，缓存的寿命是15分钟
+# def small_white_views(request):
+#     # print("我是小白视图")
+#
+#     rep = HttpResponse("I am rep")
+#     return rep
 
 # def small_white_views(request):
 #     # print("我是小白视图")
